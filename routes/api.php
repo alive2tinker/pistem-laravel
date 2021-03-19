@@ -25,6 +25,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/makes', [MakeController::class, 'index']);
+Route::get('/countries', [CountryController::class, 'index']);
+Route::get('/cities/{country}', [CityController::class, 'index']);
+
 Route::get('modeles/{make}', [ModeleController::class, 'index']);
 Route::prefix('cars')->group(function(){
     Route::get('/calculate', [CarController::class, 'calculate']);

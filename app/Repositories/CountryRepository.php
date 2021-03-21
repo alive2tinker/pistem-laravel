@@ -20,6 +20,6 @@ class CountryRepository {
 
         return cache()->remember($key, 0, function(){
             return CountryResource::collection(Country::all());
-        }
+        });
     }
 }

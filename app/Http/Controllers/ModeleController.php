@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Make;
 use Illuminate\Http\Request;
-
+use App\Repositories\ModeleRepository;
 class ModeleController extends Controller
 {
     protected $repository;

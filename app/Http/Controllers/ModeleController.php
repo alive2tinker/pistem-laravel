@@ -14,6 +14,6 @@ class ModeleController extends Controller
     }
     public function index(Make $make)
     {
-        return $this->repository->all($make->id)
+        return $this->repository->all($make->id);
     }
 }

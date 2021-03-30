@@ -43,6 +43,7 @@ class CarRepository {
 
         return cache()->remember($key, 86400, function() use($input){
             $data = [];
+        $modele = Modele::find($input['modele_id']);
         $cars = Modele::find($input['modele_id'])->cars;
         if(count($cars) <= 1){
             if($input['mileage'] <= ($cars->first()->mileage + 1000)){
@@ -68,6 +69,7 @@ class CarRepository {
             $b = (($n * $exy) - ($ex*$ey)) / (($n * $ex2) - pow($ex, 2));
 
             $value = $a + ($b * $input['mileage']);
+            $data['picture'] = $modele->picture;
             $data['value'] = $value;
         }
         return response()->json($data, 200);

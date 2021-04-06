@@ -70,7 +70,7 @@ class CarRepository {
 
             $value = $a + ($b * $input['mileage']);
             $data['picture'] = $modele->picture;
-            $data['value'] = $value;
+            $data['value'] = number_format($value, 2);
         }
         return response()->json($data, 200);
         });

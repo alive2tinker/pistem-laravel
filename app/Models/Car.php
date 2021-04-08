@@ -33,4 +33,9 @@ class Car extends Model
     {
         return $this->belongsTo(Modele::class);
     }
+
+    public function uploads()
+    {
+        return $this->morphMany(Upload::class, 'uploadable');
+    }
 }

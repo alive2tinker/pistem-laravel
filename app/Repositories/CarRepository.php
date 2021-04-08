@@ -18,7 +18,7 @@ class CarRepository {
     public function all(){
         $key = $this->getCacheKey("for_sale");
         return cache()->remember($key, 0, function(){
-            $cars = Car::with(['user','city','modele'])->where('for_sale', 1)->orderby('created_at','desc')->paginate(10);
+            $cars = Car::with(['user','city','modele','uploads'])->where('for_sale', 1)->orderby('created_at','desc')->paginate(10);
             return CarResource::collection($cars);
         });
     }

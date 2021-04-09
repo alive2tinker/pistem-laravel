@@ -39,14 +39,16 @@ class CarController extends Controller
     public function store(StoreNewCar $request)
     {
         $car = Auth::user()->cars()->create($request->only('modele_id','city_id','mileage','price', 'details','for_sale'));
-        foreach($request->input('images') as $b64img){
-            $img = base64_decode($b64img['file']['data']);
-            $ext = explode('/', $b64img['file']['mime'])[1];
-            $path = "carsForSale/".time().".".$ext;
-            Log::info(Storage::disk('public')->put($path, $img));
-            $car->uploads()->create([
-                'link' => $path
-            ]);
+        if($request->has('images')){
+            foreach($request->input('images') as $b64img){
+                $img = base64_decode($b64img['file']['data']);
+                $ext = explode('/', $b64img['file']['mime'])[1];
+                $path = "carsForSale/".time().".".$ext;
+                Log::info(Storage::disk('public')->put($path, $img));
+                $car->uploads()->create([
+                    'link' => $path
+                ]);
+            }
         }
         if($request->input('for_sale'))
             $this->repository->add($car);
